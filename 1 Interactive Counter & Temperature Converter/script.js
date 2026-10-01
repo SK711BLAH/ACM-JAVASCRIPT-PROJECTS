@@ -39,3 +39,46 @@
 */
 
 // WRITE YOUR CODE BELOW:
+let count = 0; // Using let, the value assigned to count can change but not the samewith const.
+
+const countLabel = document.getElementById("counter");
+
+document.getElementById("I").onclick = function()
+{
+    count++;
+    countLabel.textContent = count;
+};
+
+document.getElementById("D").onclick = function()
+{
+    count--;
+    countLabel.textContent = count;
+};
+
+document.getElementById("R").onclick = function() 
+{
+    count = 0;
+    countLabel.textContent = count;
+};
+
+
+
+document.getElementById("submitBtn").onclick = function() 
+{
+
+    let temp = Number(document.getElementById("T").value);
+    let result = document.getElementById("result");
+
+    if (document.getElementById("toFahrenheit").checked) 
+    {
+        result.textContent = ((temp * 9 / 5) + 32).toFixed(1) + "°F";
+    }
+    else if (document.getElementById("toCelsius").checked) 
+    {
+        result.textContent = ((temp - 32) * 5 / 9).toFixed(1) + "°C";
+    }
+    else 
+    {
+        result.textContent = "Please select a unit.";
+    }
+};

@@ -34,3 +34,77 @@
 */
 
 // WRITE YOUR CODE BELOW:
+
+document.getElementById("rollBtn").onclick = function() {
+
+    let numDice = Number(document.getElementById("numDice").value);
+    let values = [];
+    let images = "";
+
+    for (let i = 0; i < numDice; i++) {
+
+        let roll = Math.floor(Math.random() * 6) + 1;
+
+        values.push(roll);
+
+        images += `<img src="dice_images/${roll}.png">`;
+    }
+
+    document.getElementById("diceResult").textContent = values.join(", ");
+    document.getElementById("diceImages").innerHTML = images;
+};
+
+let lowercase = "abcdefghijklmnopqrstuvwxyz";
+let uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+let numbers = "0123456789";
+let symbols = "!@#$%^&*()";
+
+function generatePassword(length, includeLower, includeUpper, includeNumbers, includeSymbols) {
+
+    let allowedChars = "";
+    let password = "";
+
+    if (length <= 0) {
+        return "Password length must be greater than 0.";
+    }
+
+    if (includeLower) {
+        allowedChars += lowercase;
+    }
+
+    if (includeUpper) {
+        allowedChars += uppercase;
+    }
+
+    if (includeNumbers) {
+        allowedChars += numbers;
+    }
+
+    if (includeSymbols) {
+        allowedChars += symbols;
+    }
+
+    if (allowedChars.length === 0) {
+        return "Please choose at least one character set.";
+    }
+
+    for (let i = 0; i < length; i++) {
+        let randomIndex = Math.floor(Math.random() * allowedChars.length);
+        password += allowedChars[randomIndex];
+    }
+
+    return password;
+}
+
+document.getElementById("generateBtn").onclick = function() {
+
+    let length = Number(document.getElementById("pwLength").value);
+    let includeLower = document.getElementById("includeLower").checked;
+    let includeUpper = document.getElementById("includeUpper").checked;
+    let includeNumbers = document.getElementById("includeNumbers").checked;
+    let includeSymbols = document.getElementById("includeSymbols").checked;
+
+    let result = generatePassword(length, includeLower, includeUpper, includeNumbers, includeSymbols);
+
+    document.getElementById("pwResult").textContent = result;
+};

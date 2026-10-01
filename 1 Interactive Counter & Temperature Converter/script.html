@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+   
+    <style> /*For CSS*/
+        h1
+        {
+             text-align: center;
+        }
+    </style>
+    <h1>Number Counter & Temperature Converter</h1>
+    <body>
+        <h2>1] Counter</h2>
+        <p id="counter">0</p> 
+        <button id="D">DECREASE</button>
+        <button id="R">RESET</button>
+        <button id="I">INCREASE</button>
+
+        <h2>2] Temperature Converter</h2>
+        <input type="number" id="T">
+        <br>
+        <input type="radio" id="toFahrenheit" name="unit" value="Fahrenheit">
+        <label for="toFahrenheit">Convert to Fahrenheit</label>
+        <input type="radio" id="toCelsius" name="unit" value="Celsius">
+        <label for="toCelsius">Convert to Celsius</label>
+        <br>
+        <button id="submitBtn">Submit</button>
+        <p id="result"></p>
+      <script src="script.js"></script>
+    </body>
+</html>

@@ -33,3 +33,73 @@
 */
 
 // WRITE YOUR CODE BELOW:
+
+let todoList = JSON.parse(localStorage.getItem('todoList'));
+
+if (!todoList) {
+  todoList = [
+    {
+      name: 'make dinner',
+      dueDate: '2022-12-22'
+    },
+    {
+      name: 'wash dishes',
+      dueDate: '2022-12-22'
+    }
+  ];
+}
+
+const todoInput = document.querySelector('.js-name-input');
+const dueDateInput = document.querySelector('.js-due-date-input');
+const addButton = document.querySelector('.js-add-todo-button');
+const todoContainer = document.querySelector('.js-todo-list');
+
+function renderTodoList() {
+  let todoListHTML = '';
+
+  todoList.forEach((todoObject, index) => {
+    const { name, dueDate } = todoObject;
+
+    todoListHTML += `
+      <div>${name}</div>
+      <div>${dueDate}</div>
+      <button class="js-delete-todo-button">Delete</button>
+    `;
+  });
+
+  todoContainer.innerHTML = todoListHTML;
+
+  document.querySelectorAll('.js-delete-todo-button')
+    .forEach((deleteButton, index) => {
+      deleteButton.addEventListener('click', () => {
+        todoList.splice(index, 1);
+
+        localStorage.setItem('todoList', JSON.stringify(todoList));
+
+        renderTodoList();
+      });
+    });
+}
+
+addButton.addEventListener('click', () => {
+  const name = todoInput.value;
+  const dueDate = dueDateInput.value;
+
+  if (name === '') {
+    return;
+  }
+
+  todoList.push({
+    name: name,
+    dueDate: dueDate
+  });
+
+  todoInput.value = '';
+  dueDateInput.value = '';
+
+  localStorage.setItem('todoList', JSON.stringify(todoList));
+
+  renderTodoList();
+});
+
+renderTodoList();
